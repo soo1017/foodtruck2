@@ -1,0 +1,15 @@
+<form name="ftlocationFormNg">
+    <div class="day cls-input">
+        <label for="day">Day</label><br>
+        <input type="text" name="day" ng-model="ftlocationForm.day" id="id-day" placeholder="Wednesday (Case Sensitive)" required>
+    </div>
+    <div class="address cls-input">
+        <label for="address">Address</label><br>
+        <input type="text" name="location" ng-model="ftlocationForm.location" id="id-address" placeholder="1234 Example st, Example City, CA" required>
+    </div>
+<!--                    <input type="hidden" name="_csrf" value="csrfToken">-->
+    <input type="submit" class="btn btn-primary" value="Modify FT Location" ng-click="ftlocationForm.submitForm()" ng-disabled="ftlocationFormNg.$invalid">
+    <div class="alert alert-info warning" role="alert" ng-show="ftlocationadminError">
+        {{ftlocationadminError}}
+    </div>
+</form>    

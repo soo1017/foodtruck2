@@ -1,0 +1,37 @@
+<div class="row monitor">
+    <div class="admin-nav row">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/monitor" class="btn btn-success" role="button">Orders Monitor</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/stock" class="btn btn-success" role="button">Check Stocks</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/contentsmanage" class="btn btn-success" role="button">Content Management</a>
+        </div>
+    </div>
+    <div class="monitor-order row">
+        <div class="title">
+            <h4>Today Orders</h4>
+        </div>
+        <hr>
+        <div class="col-xs-12 col-sm-8 col-md-8 offset-sm-2 offset-md-2 panel">
+            <div class="panel panel-default" ng-repeat="itm in todayorders" >
+                <p>{{itm.timestamp}} <a ><ion-icon name="close-circle" data-id="{{itm.timestamp}}" ng-click="closeOrder($event)" class="cls-close"></ion-icon></a></p>
+                <p ng-if="msg_completeOrder !== ''">{{msg_completeOrder}}</p>
+                <div class="panel-body">
+                    <ul class="list-group" >
+                        <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="itm1 in itm.eachorder.items">
+                            <p>{{ itm1.item.name }} ::::: {{ itm1.qty }} 
+                                 <span ng-if="itm1.qty == 1">item</span>
+                                 <span ng-if="itm1.qty > 1">items</span>
+                                 <span class="badge badge-primary badge-pill price">{{itm1.price.toFixed(2)}}</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer"><strong>total: ${{itm.eachorder.totalPrice.toFixed(2)}}</strong></div>
+            </div>
+        </div>
+    </div>
+</div>

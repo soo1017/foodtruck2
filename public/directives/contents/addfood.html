@@ -1,0 +1,33 @@
+<form name="addfoodFormNg" class="addfood" role="form" enctype="multipart/form-data">
+    <div class="foodname cls-input">
+        <label for="name">Food Name</label><br>
+        <input type="text" name="name" ng-model="name" id="idname" placeholder="Cal" required>
+    </div>
+    <div class="foodprice cls-input">
+        <label for="price">Food Price</label><br>
+        <input type="text" name="price" ng-model="price" id="idprice" placeholder="9.99" required>
+    </div>
+    <div class="fooddescription cls-input">
+        <label for="description">Food Description </label><br>
+        <input type="text" name="description" ng-model="description" id="iddescription" placeholder="less than 100 chars" required>
+    </div>
+    <div class="foodcategory cls-input">
+        <label for="category">Food Category</label><br>
+        <select ng-model="categoryValue" ng-options="c.name for c in dishcategories" id="idcategory" ng-change="getValue()"></select>
+    </div>
+    <div class="foodquantity cls-input">
+        <label for="price">Food Quantity</label><br>
+        <input type="text" name="quantity" ng-model="quantity" id="idquantity" placeholder="100" required>
+    </div>
+    <div class="foodimage cls-input">
+        <label for="file">Food Image (330 x 150px recommended)</label>
+<!--        <input type="file" name="file" id="idfile">-->
+<!--        <input type="file" name="file" id="idfile" file-model="imagefile">-->
+        <file-upload></file-upload>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Add a Food" ng-click="addfoodsubmitForm()" ng-disabled="addfoodFormNg.$invalid">
+    <div class="alert alert-info warning" role="alert" ng-show="addfoodadminError">
+        {{addfoodadminError}}
+    </div>
+</form>    

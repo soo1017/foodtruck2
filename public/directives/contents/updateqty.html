@@ -1,0 +1,15 @@
+<form name="updatequantityFormNg">
+    <div class="foodname cls-input">
+        <label for="food">Food Name</label>
+        <input type="text" name="name" ng-model="updatequantityForm.name" id="id-food" placeholder="Cal" required>
+    </div>
+    <div class="foodquantity cls-input">
+        <label for="address">Quantity</label>
+        <input type="text" name="quantity" ng-model="updatequantityForm.quantity" id="id-quantity" placeholder="1000" required>
+    </div>
+<!--                    <input type="hidden" name="_csrf" value="csrfToken">-->
+    <input type="submit" class="btn btn-primary" value="Update Food Qty" ng-click="updatequantityForm.submitForm()" ng-disabled="updatequantityFormNg.$invalid">
+    <div class="alert alert-info warning" role="alert" ng-show="updateqtyadminError">
+        {{updateqtyadminError}}
+    </div>
+</form>    

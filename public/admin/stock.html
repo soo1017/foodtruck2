@@ -1,0 +1,48 @@
+<div class="stock" ng-controller="stockController">
+    <div class="admin-nav row">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/monitor" class="btn btn-success" role="button">Orders Monitor</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/stock" class="btn btn-success" role="button">Check Stocks</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/contentsmanage" class="btn btn-success" role="button">Content Management</a>
+        </div>
+    </div>
+    <!--    Menu Start -->
+    <div class="container1 stockmenu" id="id-stockmenu" ng-init="menu='other'">
+        <div class="title">
+            <h5>MENUS STOCK LEVEL</h5>
+        </div>
+
+        <div class="alert alert-info warning" role="alert" ng-show="stockadminError">
+            {{stockadminError}}
+        </div>
+        <div class="row1 sushi">
+            <p class="subtitle"><strong>Sushi</strong></p>
+            
+            <stock-sushi-level sushiarry-array="sushiarry"></stock-sushi-level>
+               
+        </div>
+        <div class="row1 noodle">
+            <p class="subtitle"><strong>Noodle</strong></p>
+            
+            <stock-noodle-level noodlearry-array="noodlearry"></stock-noodle-level>
+                
+        </div>
+        <div class="row1 salad">
+            <p class="subtitle"><strong>Salad</strong></p>
+        
+            <stock-salad-level saladarry-array="saladarry"></stock-salad-level>
+              
+        </div>
+        <div class="row1 drink">
+            <p class="subtitle"><strong>Drink</strong></p>
+           
+            <stock-drink-level drinkarry-array="drinkarry"></stock-drink-level>
+            
+        </div>
+    </div>
+    <!--    Menu End -->
+</div>

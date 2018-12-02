@@ -1,0 +1,84 @@
+<div class="row manage">
+    <div class="admin-nav row">
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/monitor" class="btn btn-success" role="button">Orders Monitor</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/stock" class="btn btn-success" role="button">Check Stocks</a>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+            <a href="#/contentsmanage" class="btn btn-success" role="button">Content Management</a>
+        </div>
+    </div>
+    <div class="manage-contents row">
+        <div class="title">
+            <h4>Contents Management</h4>
+        </div>
+        <hr>
+        
+        <div class="col-xs-10 col-sm-10 col-md-8 offset-xs-1 offset-sm-1 offset-md-2 manage-content-sec">
+            <div >
+                <h5>Modify Food Truck Location</h5>
+                <modify-ftloc></modify-ftloc>
+            </div>
+            <hr>
+
+            <div>
+                <h5>Delete Food</h5>
+                <delete-food></delete-food>
+            </div>
+
+            <div>
+                <h5>Add Food</h5>
+<!--                <add-food category-value="category"></add-food>-->
+                <form ng-controller="addFoodController as add" name="add.add_form" class="addfood">
+<!--                <form name="addfoodFormNg" class="addfood" role="form" enctype="multipart/form-data">-->
+                    <div class="foodname cls-input">
+                        <label for="name">Food Name</label><br>
+                        <input type="text" name="name" ng-model="add.name" id="idname" placeholder="Cal" required>
+                    </div>
+                    <div class="foodprice cls-input">
+                        <label for="price">Food Price</label><br>
+                        <input type="text" name="price" ng-model="add.price" id="idprice" placeholder="9.99" required>
+                    </div>
+                    <div class="fooddescription cls-input">
+                        <label for="description">Food Description </label><br>
+                        <input type="text" name="description" ng-model="add.description" id="iddescription" placeholder="less than 100 chars" required>
+                    </div>
+                    <div class="foodcategory cls-input">
+                        <label for="category">Food Category</label><br>
+                        <select ng-options="item as item.label for item in items track by item.id" ng-model="add.selected" id="idcategory"></select>
+                    </div>
+                    <div class="foodquantity cls-input">
+                        <label for="price">Food Quantity</label><br>
+                        <input type="text" name="quantity" ng-model="add.quantity" id="idquantity" placeholder="100" required>
+                    </div>
+                    <div class="foodimage cls-input">
+                        <label for="file">Food Image (330 x 150px ratio)</label>
+                <!--        <input type="file" name="file" id="idfile">-->
+                <!--        <input type="file" name="file" id="idfile" file-model="imagefile">-->
+<!--                        <file-upload></file-upload>-->
+                        <input type="file" ngf-select ng-model="add.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" id="idfile" required/>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Add a Food" ng-click="add.addfoodsubmitForm()" ng-disabled="add.add_form.$invalid">
+                    <div class="alert alert-info warning" role="alert" ng-show="addfoodadminError">
+                        {{addfoodadminError}}
+                    </div>
+                </form>    
+            </div>
+            
+            <div>
+                <h5>Update Food Quantity</h5>
+                <update-qty></update-qty> 
+            </div>
+            
+            <hr>
+            
+            <div class="queryorders">
+                <query-orders></query-orders>
+            </div>
+
+        </div>
+    </div>
+</div>

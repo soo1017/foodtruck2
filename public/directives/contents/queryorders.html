@@ -1,0 +1,29 @@
+<div>
+    <form name="queryorderFormNg">
+        <div class="date cls-input">
+            <label for="date">Query Orders with Date</label>
+            <input type="text" name="date" ng-model="queryorderForm.date" id="id-date" placeholder="MM/DD/YYYY" ng-pattern="/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/" required>
+        </div>
+    <!--                    <input type="hidden" name="_csrf" value="csrfToken">-->
+        <input type="submit" class="btn btn-primary" value="Query Orders" ng-click="queryorderForm.submitForm()" ng-disabled="queryorderFormNg.$invalid">
+        <div class="alert alert-info warning" role="alert" ng-if="queryorderadminError !== ''">
+                            {{queryorderadminError}}
+        </div>
+    </form>    
+</div>
+                
+<div class="panel panel-default" ng-repeat="itm in queryorders" ng-if="queryorderadminError === ''">
+    <p>{{itm.timestamp}}</p>
+    <div class="panel-body">
+        <ul class="list-group" >
+            <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="itm1 in itm.eachorder.items">
+                <p>{{ itm1.item.name }} ::::: {{ itm1.qty }} 
+                    <span ng-if="itm1.qty == 1">item</span>
+                    <span ng-if="itm1.qty > 1">items</span>
+                    <span class="badge badge-primary badge-pill price">{{itm1.price.toFixed(2)}}</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-footer"><strong>total: ${{itm.eachorder.totalPrice.toFixed(2)}}</strong></div>
+</div>

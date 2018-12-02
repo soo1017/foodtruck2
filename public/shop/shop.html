@@ -1,0 +1,87 @@
+<div class="shop" ng-controller="shopController">
+    
+    <!--    Menu Start -->
+    <div class="container1 menu" id="id-menu" ng-init="menu='other'">
+        <div class="row1 title">
+            <h5>MENUS</h5>
+        </div>
+
+        <div class="row1 sushi">
+            <p class="subtitle"><strong>Sushi</strong></p>
+            <div class="row" ng-repeat="sus in sushi_arry">
+                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat= "item in sus">
+                    <div class="thumbnail">
+                        <p class="out-of-stock" ng-show="isQuantityEmpty({{item.currentquantity}})"><strong>Sold Out</strong></p>
+                        <img ng-src="{{item.image}}" alt="..." ng-show="!isQuantityEmpty({{item.currentquantity}})">
+                        <div class="caption">
+                            <h6><strong>{{item.name}}</strong></h6>
+                            <p>{{item.description}}</p>
+                            <p>
+                                <span>{{item.price.toFixed(2)}}</span> 
+                                <button type="button" data-id='{{item._id}}' class="btn btn-success" ng-click="getItemId($event)" ng-show="!isQuantityEmpty({{item.currentquantity}})">Add to Cart</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row1 noodle">
+            <p class="subtitle"><strong>Noodle</strong></p>
+            <div class="row" ng-repeat="nood in noodle_arry">
+                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat= "item in nood">
+                    <div class="thumbnail">
+                        <p class="out-of-stock" ng-show="isQuantityEmpty({{item.currentquantity}})"><strong>Sold Out</strong></p>
+                        <img ng-src="{{item.image}}" alt="..." ng-show="!isQuantityEmpty({{item.currentquantity}})">
+                        <div class="caption">
+                            <h6><strong>{{item.name}}</strong></h6>
+                            <p>{{item.description}}</p>
+                            <p>
+                                <span>{{item.price.toFixed(2)}}</span> 
+                                <button type="button" data-id='{{item._id}}' class="btn btn-success" ng-click="getItemId($event)" ng-show="!isQuantityEmpty({{item.currentquantity}})">Add to Cart</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row1 salad">
+            <p class="subtitle"><strong>Salad</strong></p>
+            <div class="row" ng-repeat="sal in salad_arry">
+                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat= "item in sal">
+                    <div class="thumbnail">
+                        <p class="out-of-stock" ng-show="isQuantityEmpty({{item.currentquantity}})"><strong>Sold Out</strong></p>
+                        <img ng-src="{{item.image}}" alt="..." ng-show="!isQuantityEmpty({{item.currentquantity}})">
+                        <div class="caption">
+                            <h6><strong>{{item.name}}</strong></h6>
+                            <p>{{item.description}}</p>
+                            <p>
+                                <span>{{item.price.toFixed(2)}}</span> 
+                                <button type="button" data-id='{{item._id}}' class="btn btn-success" ng-click="getItemId($event)" ng-show="!isQuantityEmpty({{item.currentquantity}})">Add to Cart</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row1 drink">
+            <p class="subtitle"><strong>Drink</strong></p>
+            <div class="row" ng-repeat="drn in drink_arry">
+                <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat= "item in drn">
+                    <div class="thumbnail">
+                        <p class="out-of-stock" ng-show="isQuantityEmpty({{item.currentquantity}})"><strong>Sold Out</strong></p>
+                        <img ng-src="{{item.image}}" alt="..." ng-show="!isQuantityEmpty({{item.currentquantity}})">
+                        <div class="caption">
+                            <h6><strong>{{item.name}}</strong></h6>
+                            <p>{{item.description}}</p>
+                            <p>
+                                <span>{{item.price.toFixed(2)}}</span> 
+                                <button type="button" data-id='{{item._id}}' class="btn btn-success" ng-click="getItemId($event)" ng-show="!isQuantityEmpty({{item.currentquantity}})">Add to Cart</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    Menu End -->
+</div>

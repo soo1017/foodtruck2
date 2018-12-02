@@ -1,0 +1,25 @@
+<div class="row profile" ng-controller="profileController">
+    <div class="col-md-8 col-sm-8 offset-md-2 offset-sm-2 ">
+        <h5>User Profile</h5>
+        <hr>
+        <h6>My Order</h6>
+        <div>
+            <div class="panel panel-default" ng-repeat="itm in orders" >
+                <p>{{itm.timestamp}}</p>
+                <div class="panel-body">
+<!--                    {{orders}}-->
+                    <ul class="list-group" >
+                        <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="itm1 in itm.eachorder.items">
+                            <p>{{ itm1.item.name }} ::::: {{ itm1.qty }} 
+                                 <span ng-if="itm1.qty == 1">item</span>
+                                 <span ng-if="itm1.qty > 1">items</span>
+                                 <span class="badge badge-primary badge-pill price">{{itm1.price.toFixed(2)}}</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer"><strong>total: ${{itm.eachorder.totalPrice.toFixed(2)}}</strong></div>
+            </div>
+        </div>
+    </div>
+</div>

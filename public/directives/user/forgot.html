@@ -1,0 +1,15 @@
+<h5>Forgot Password</h5>
+<form name="forgotFormNg">
+    <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input type="text" ng-model="forgotForm.email" id="email" name="email" class="form-control" required>
+        <span class="error" ng-show="forgotForm.email.$error.required">Required!</span>
+        <span class="error" ng-show="forgotForm.email.$error.email">Not valid email!</span>
+    </div>
+<!--            <input type="hidden" name="_csrf" value="csrfToken">-->
+    <button type="submit" class="btn btn-primary" ng-click="forgotForm.submitForm()" ng-disabled="forgotFormNg.$invalid">Reset Password</button>
+    <p ng-show="forgotmessage">{{forgotmessage}}</p>
+    <div class="alert alert-danger forgotwarning" role="alert" ng-show="forgotError">
+        {{forgotError}}
+    </div>
+</form>

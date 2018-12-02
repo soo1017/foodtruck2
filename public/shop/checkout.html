@@ -1,0 +1,104 @@
+
+<div class="checkout" ng-controller="checkoutController">
+    <div class="container2" id="id-checkout" ng-init="menu='other'">
+        <div class="row title">
+            <h5>CHECK OUT</h5>
+        </div>
+        <div class='row'>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 checkout-part">
+                <form name="uptasteFormNg">
+<!--                <form action="/checkout" method="post" id="checkout-form">-->
+                    <p class="pickup-title">Pickup Information</p>
+                    <div class="pickup">
+                        <div class="name cls-input">
+                            <p>Full Name</p>
+                            <input type="text" name="name" ng-model="uptasteForm.name" id="name" class="cls-name" placeholder="John Smith" value='' required>
+                        </div>
+                        <div class="email cls-input">
+                            <p>Email</p>
+                            <input type="text" name="email" ng-model="uptasteForm.email" id="email" class="cls-email" placeholder="email@example.com"  value="" required>
+                        </div>
+                        <div class="cls-checkout-info-phone cls-input">
+                            <p>Mobile Phone</p>
+                            <input type="text" name="phone" ng-model="uptasteForm.phone" id="phone" class="cls-phone" placeholder="(777)777-7777" ng-pattern="/^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})$/" value="" required>
+                        </div>
+                        <div class="cls-checkout-info-address cls-input">
+                            <p>Address</p>
+                            <input type="text" name="address" ng-model="uptasteForm.address" id="address" class="cls-address" placeholder="777 Uptaste st, Union City, CA 94530" value=""  required>
+                        </div>
+                    </div>
+
+                    <p class="payment-title">Payment Information</p>
+                    <div class="payment">
+                        <div class="creditnumber cls-input">
+                            <p>Card Number</p>
+                            <input type="text" name="number" ng-model="uptasteForm.number"  id="number" class="cls-cardnumber" placeholder="1234 5678 9012 3456"  required>
+                        </div>
+                        <div class="creditexpr cls-input">
+                            <p>Exprired Date</p>
+                            <input type="text" name="mm" ng-model="uptasteForm.mm" id="expr-month" class="cls-expr-month" placeholder="Month(MM)"  required>
+                            <input type="text" name="yy" ng-model="uptasteForm.yy" id="expr-year" class="cls-expr-year" placeholder="Year(YY)" required>
+                        </div>
+                        <div class="creditcvv cls-input">
+                            <p>CVV</p>
+                            <input type="text" name="cvv" ng-model="uptasteForm.cvv" id="cvv" class="cls-cvv" placeholder="777" ng-minlength="3" ng-maxlength="4" required>
+                        </div>
+                        <div class="creditzip cls-input">
+                            <p>ZIP Code</p>
+                            <input type="text" name="zip" ng-model="uptasteForm.zip" id="zip" class="cls-zip" placeholder="94530" ng-minlength="5" ng-maxlength="5" required>
+                        </div>
+                    </div>
+   
+<!--                    <input type="hidden" name="_csrf" value="csrfToken">-->
+                    <input type="submit" style="display:none" class="btn btn-success" id="buy" ng-click="uptasteForm.submitForm()" ng-disabled="uptasteFormNg.$invalid">
+                    
+                    <div class="alert alert-warning warn" role="alert" ng-show="uptasteFormNg.$invalid">
+                        <p>Please fill up all fields</p>
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 cart-part">
+                <div class="inner-cart">
+                    <div class="cartpart-header">
+                        <img src="/images/checkout/dish.jpg" alt="">
+                    </div>
+                    <div class="cartpart-ready">
+                        <p>Ready within 20-25 min</p>
+                    </div>
+                    <div class="cartpart-content">
+                        <ul class="content-ul" id="id-content-ul">
+                            <li ng-repeat="itt in cartCheckout.items">
+                                <p>{{itt.item.name}}</p>
+<!--                                <a href="/shop/checkout/remove-one-fromcart/{{this.item._id}}"><ion-icon name="close-circle" id="id-item-delete"></ion-icon></a>-->
+                                <button type="button"><ion-icon name="close-circle" data-id="{{itt.item._id}}" ng-click="removeOneItem($event)"></ion-icon></button>
+                                <p class="content-price">{{itt.item.price.toFixed(2)}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr style="width:90%">
+                    <div class="cartpart-pay">
+                        <p>You Pay<span id="id-youpay">${{cartCheckout.totalPrice.toFixed(2)}}</span></p>
+                    </div>
+                    <div class="cartpart-clear" ng-if="cartCheckout.totalQty > 0">
+                        <button type="button" ng-click="removeAllItem()">Clear Cart</button>
+<!--                        <a href="/shop/checkout/clear-cart" class="clearcart">Clear Cart</a>-->
+                    </div>
+                </div>
+                <div class="cartpart-placeorder" ng-if="cartCheckout.totalQty > 0">
+                    <label type="submit" class="placeorder btn btn-primary" id="id-placeorder" for="buy">Place Order</label>
+                </div>
+                <div class="alert alert-danger outofstock" role="alert" ng-if="outofstock === true">
+                    <p>Sorry, some items are sold out, <br>Please try again by adjusting your order</p>
+                    <ul>
+                        <li ng-repeat="item in outofstockItems">
+                            <p>{{item.name}} short of {{item.shortAmount}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

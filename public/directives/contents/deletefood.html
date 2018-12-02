@@ -1,0 +1,11 @@
+<form name="deletefoodFormNg">
+    <div class="foodname cls-input">
+        <label for="name">Food Name</label>
+        <input type="text" name="name" ng-model="deletefoodForm.name" id="id-food" placeholder="Cal" required>
+    </div>
+<!--                    <input type="hidden" name="_csrf" value="csrfToken">-->
+    <input type="submit" class="btn btn-primary" value="Delete a Food" ng-click="deletefoodForm.submitForm()" ng-disabled="deletefoodFormNg.$invalid">
+    <div class="alert alert-info warning" role="alert" ng-show="deletefoodadminError">
+        {{deletefoodadminError}}
+    </div>
+</form>    

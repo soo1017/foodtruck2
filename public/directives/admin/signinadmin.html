@@ -1,0 +1,20 @@
+<h2>Admin Sign In</h2>
+<form name="signinadminFormNg">
+<!--        <form action="/user/signin" method="post">-->
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" ng-model="signinadminForm.email" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" ng-model="signinadminForm.password" name="password" class="form-control" ng-minlength="8" required>
+    </div>
+<!--            <input type="hidden" name="_csrf" value="csrfToken">-->
+    <button type="submit" class="btn btn-primary" ng-click="signinadminForm.submitForm()" ng-disabled="signinadminFormNg.$invalid">Sign In</button>
+    <div class="alert alert-danger signinwarning" role="alert" ng-show="signinadminError">
+        {{signinadminError}}
+    </div>
+</form>
+<div class="signup-link admin-signup-link">
+    <p>Don't Have An Admin Account Yet? <a href="#/signup-a">Sign Up</a></p>
+</div>

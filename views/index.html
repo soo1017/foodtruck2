@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="foodtruckApp">
+    <head>
+        <title>FoodTruck</title>
+<!--        <base href="/">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="shortcut icon" href="/images/favicon/uptaste-favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bai+Jamjuree|Mali|Merriweather|Poppin|Work+Sans|Berkshire+Swash|Petit+Formal+Script|Charmonman">
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' />
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <script src="https://code.angularjs.org/1.5.11/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.11/angular-route.min.js"></script>
+        <script src="https://code.angularjs.org/1.5.11/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/javascripts/ng-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="/javascripts/ng-file-upload.min.js"></script>
+    </head>
+    <body ng-controller="headController">
+<!--    <body ng-controller="headController" ng-init="reqSession = {req.session}">-->
+        <section class="" ng-class="{sectionnavbar: menu === 'home'}">
+<!--        <section class="section-navbar" ng-class="">-->
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#/">
+                    <img src="/images/logo/logo.png" width="60" height="60" alt="">
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#/#id-foodtruck">FoodTruck </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#/#id-menu">Menu </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#/shop">Shop </a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="nav-item active">
+                            <div class="navcart" id="id-navcart" ng-click="convertShowme()">
+                                <img src="/images/icon/cart.png" alt="Smiley face" class="cart-image" width="42" height="42">
+                                <span class='badge badge-warning cartcount'>{{cartHead.totalQty}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul ng-model="islogin">
+                        <li ng-if="islogin === 'false'" >
+<!--                        <li ng-if='!sidebar.islogin' id="sidebar">-->
+                            <a class="signin" href="#/signin">SignIn</a>
+                        </li>
+                        <li ng-if="islogin === 'true'">
+                            <a class="signout" href="" ng-click="logoutSubmit()">SignOut</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--    Shopping Cart-->
+                <div id="id-shoppingcart" class="shoppingcart" ng-show="showme" ng-init="showme=false">
+                    <div class="items">
+                        <div class="head">
+                            <p>
+                                <span id="count-cart">{{cartHead.totalQty}}</span>
+                                <span id="item-cart" ng-if="cartHead.totalQty > 1">items</span>
+                                <span id="item-cart" ng-if="cartHead.totalQty <= 1">item</span>
+                            </p>
+                            <span id="id-cartclose" ng-click="showme=false">&times;</span>
+                        </div>
+                        <div class="ready">
+                            <p>Ready within 20-25 min</p>
+                        </div>
+
+                        <div class="content">
+                            <ul id="id-content-ul">
+                                <li ng-repeat="it in cartHead.items">
+                                    <p>{{it.item.name}}</p>
+                                    <button type="button"><ion-icon name="close-circle" data-id="{{it.item._id}}" ng-click="removeOneItem($event)"></ion-icon></button>
+                                    <p class="price">{{it.price.toFixed(2)}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr style="width:90%">
+                        <div class="pay">
+                            <p>You Pay<span id="id-youpay">${{cartHead.totalPrice.toFixed(2)}}</span></p>
+                        </div>
+                        <div class="button" ng-if="cartHead.totalQty > 0">
+                            <div ng-if="islogin==='false'">
+                                <a href="#/signin" class="btn btn-success" id="id-checkout-btn" ng-click="proceedToCheckoutToLogin()">Proceed with SignIn</a>
+                                <a href="#/checkout" class="btn btn-success" id="id-checkout-btn" ng-click="proceedToCheckout()">Proceed as Guest</a>
+                            </div>
+                            <div ng-if="islogin==='true'">
+                                <a href="#/checkout" class="btn btn-success" id="id-checkout-btn" ng-click="proceedToCheckout()">Proceed</a>
+                            </div>
+                            <br>
+                            <div ng-if="cartHead.totalQty > 0">
+                                <button type="button" ng-click="removeAllItem()">Clear Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--      End of Shopping Cart          -->
+                
+            </nav>
+        </section>
+        
+<!--        <div class="container">-->
+            
+            <div ng-view></div>
+        
+<!--        </div>-->
+        <footer class="container-fluid text-center foot">
+
+            <div class="copyrights">
+                <p class="white-txt">UpTaste © 2017
+                    <br><br>
+                    <img class="footimg" src="/images/logo/logo.png" alt="Logo">
+                </p>
+                <hr class="dark-line">
+                <a class="link" href="#">Contact Us</a>&nbsp
+                <a class="link" href="#">Privacy Policy</a>&nbsp
+                <a class="link" href="#">Terms & Conditions</a>
+                <br><br>
+                <p class="white-txt small">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ornare elit odio, eu imperdiet ligula ullamcorper sed.
+                </p>
+            </div>
+        </footer>
+        
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=?" async defer></script>
+        <script src="https://unpkg.com/ionicons@4.4.4/dist/ionicons.js"></script>
+        <script type="text/javascript" src="/javascripts/index.js"></script>
+        <script type="text/javascript" src="/javascripts/routes.js"></script>
+        <script type="text/javascript" src="/javascripts/controllers.js"></script>
+        <script type="text/javascript" src="/javascripts/services.js"></script>
+        <script type="text/javascript" src="/javascripts/directives.js"></script>
+    </body>
+</html>
