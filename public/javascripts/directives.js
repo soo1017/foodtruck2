@@ -16,7 +16,8 @@ foodtruckApp.directive('signinUser', ['$rootScope', '$http', '$location', 'islog
             scope.signinForm.submitForm = function(item, event) {
                 var data = {
                     email: scope.signinForm.email,
-                    password: scope.signinForm.password
+                    password: scope.signinForm.password,
+                    value: scope.value                      // for csrf
                 };
                 var responsePromise = $http.post("/signin", data);
                 responsePromise.success(function(result1) {
@@ -60,7 +61,8 @@ foodtruckApp.directive('signupUser', ['$rootScope', '$http', '$location', 'islog
                 if (scope.signupForm.password === scope.signupForm.confirmpassword) {
                     var data = {
                         email: scope.signupForm.email,
-                        password: scope.signupForm.password
+                        password: scope.signupForm.password,
+                        value: scope.value 
                     };
 
                     var responsePromise = $http.post("/signup", data);
@@ -106,6 +108,7 @@ foodtruckApp.directive('forgotUser', ['$http', function ($http) {
             scope.forgotForm.submitForm = function(item, event) {
                 var data = {
                     email: scope.forgotForm.email,
+                    value: scope.value 
                 };
                 var responsePromise = $http.post("/forgot", data)
                 responsePromise.success(function(result) {
@@ -139,7 +142,8 @@ foodtruckApp.directive('forgotpassUser', ['$rootScope', '$http', '$location', '$
             scope.forgotpassForm.submitForm = function(item, event) {
                 if (scope.forgotpassForm.password === scope.forgotpassForm.confirmpassword) {
                     var data = {
-                        password: scope.forgotpassForm.password
+                        password: scope.forgotpassForm.password,
+                        value: scope.value
                     };
 
                     var url = "/forgotpass/" + typeId;
@@ -194,7 +198,8 @@ foodtruckApp.directive('signupAdmin', ['$rootScope', '$http', '$location', 'isad
                 if (scope.signupadminForm.password === scope.signupadminForm.confirmpassword) {
                     var data = {
                         email: scope.signupadminForm.email,
-                        password: scope.signupadminForm.password
+                        password: scope.signupadminForm.password,
+                        value: scope.value
                     };
 
                     var responsePromise = $http.post("/signup-a", data);
@@ -240,7 +245,8 @@ foodtruckApp.directive('signinAdmin', ['$rootScope', '$http', '$location', 'isad
             scope.signinadminForm.submitForm = function(item, event) {
                 var data = {
                     email: scope.signinadminForm.email,
-                    password: scope.signinadminForm.password
+                    password: scope.signinadminForm.password,
+                    value: scope.value
                 };
                 var responsePromise = $http.post("/signin-a", data);
                 responsePromise.success(function(result1) {
@@ -281,7 +287,8 @@ foodtruckApp.directive('modifyFtloc', ['$http', '$location', 'toTitleCase', func
             scope.ftlocationForm.submitForm = function(item, event) {
                 var data = {
                     day: toTitleCase.toTitleCase(scope.ftlocationForm.day),
-                    location: scope.ftlocationForm.location
+                    location: scope.ftlocationForm.location,
+                    value: scope.value
                 };
 //                console.log("data: ", data);
                 var responsePromise = $http.post("/modify-ftloc", data);
@@ -315,7 +322,8 @@ foodtruckApp.directive('deleteFood', ['$http', '$location', 'toTitleCase', funct
             scope.deletefoodForm.name = "";
             scope.deletefoodForm.submitForm = function(item, event) {
                 var data = {
-                    name: toTitleCase.toTitleCase(scope.deletefoodForm.name)
+                    name: toTitleCase.toTitleCase(scope.deletefoodForm.name),
+                    value: scope.value
                 };
                 var responsePromise = $http.post("/delete-food", data);
                 responsePromise.success(function(result) {
@@ -349,7 +357,8 @@ foodtruckApp.directive('updateQty', ['$http', '$location', 'toTitleCase', functi
             scope.updatequantityForm.submitForm = function(item, event) {
                 var data = {
                     name: toTitleCase.toTitleCase(scope.updatequantityForm.name),
-                    quantity: scope.updatequantityForm.quantity
+                    quantity: scope.updatequantityForm.quantity,
+                    value: scope.value
                 };
                 var responsePromise = $http.post("/update-qty", data);
                 responsePromise.success(function(result) {
@@ -382,7 +391,8 @@ foodtruckApp.directive('queryOrders', ['$http', '$location', 'toTitleCase', 'wor
             scope.queryorderForm.date = "";
             scope.queryorderForm.submitForm = function(item, event) {
                 var data = {
-                    date: scope.queryorderForm.date
+                    date: scope.queryorderForm.date,
+                    value: scope.value
                 };
                 var responsePromise = $http({
                     url: '/query-orders', 

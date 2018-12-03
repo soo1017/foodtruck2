@@ -283,7 +283,8 @@ foodtruckApp.controller('checkoutController', ['$scope', '$http', '$location', '
             mm: vm.uptasteForm.mm,
             yy: vm.uptasteForm.yy,
             cvv: vm.uptasteForm.cvv,
-            zip: vm.uptasteForm.zip
+            zip: vm.uptasteForm.zip,
+            value: vm.value                     // for csrf
         };
         var responsePromise = $http.post("/checkout", data);
         responsePromise.success(function(result) {
@@ -540,7 +541,8 @@ foodtruckApp.controller('addFoodController', ['$scope', '$window', 'Upload', 'to
                 price: price,
                 description: description,
                 category: selected.label,
-                initialquantity: quantity
+                initialquantity: quantity,
+                value: $scope.value
             }                                       //pass file as data, should be user ng-model
         }).then(function (resp) {                   //upload function returns a promise
 //            console.log("response: ", resp);

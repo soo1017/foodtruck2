@@ -41,7 +41,7 @@ app.use(session({
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 180 * 60 * 1000 }
-})); // session should be after cookieParser
+}));                                        // session should be after cookieParser
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

@@ -43,6 +43,26 @@ var app = express();
 //    res.locals.csrfToken = token;
 //    next();
 //});
+app.use(csrf());
+
+var csrfValue = function(req) {
+  var token = (req.body && req.body._csrf)
+    || (req.query && req.query._csrf)
+    || (req.headers['x-csrf-token'])
+    || (req.headers['x-xsrf-token']);
+  return token;
+};
+
+app.use(csrf({value: csrfValue}));
+
+app.use(function (req, res, next) {
+    var token = req.csrfToken();      // server genearte token and pass the csrftoken to the view 
+//    console.log("token: ", token);
+//    res.cookie('XSRF-TOKEN', req.session._csrf);  // servre send it to cookie
+    res.cookie('XSRF-TOKEN', token);  // servre send it to cookie
+    res.locals.csrfToken = token;
+    next();
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
