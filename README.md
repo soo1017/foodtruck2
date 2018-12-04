@@ -30,4 +30,4 @@ To run the codes:
 
 3. Run 'npm start' and go to 'http://localhost:3000' to see the main page
 
-4.Need your own Google Map API, Google Mail Account, and OpenWeathr API Key to fully activate this FoodTruck Online order.
+4. Need your own Google Map API, Google Mail Account, and OpenWeathr API Key to fully activate this FoodTruck Online order.
