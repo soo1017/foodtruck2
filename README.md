@@ -16,7 +16,7 @@ Features:
 
 6. Owner pages to see today's online orders, check dish inventory status, and manage(modify, delete, add) online order items, modify foodtruck location, and manage DB.
 
-7.Checkout process with Stripe payment (please refer to Stripe payment in https://github.com/tim1017/FoodTruck-Online-Order)
+7. Checkout process with Stripe payment (please refer to Stripe payment in https://github.com/tim1017/FoodTruck-Online-Order)
 
 8. Email-based password reset (Emailing disabled due to security - can be activated with your Gmail account)
 
