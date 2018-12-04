@@ -43,7 +43,7 @@ var app = express();
 //    res.locals.csrfToken = token;
 //    next();
 //});
-app.use(csrf());
+//app.use(csrf());
 
 var csrfValue = function(req) {
   var token = (req.body && req.body._csrf)
@@ -53,11 +53,11 @@ var csrfValue = function(req) {
   return token;
 };
 
-app.use(csrf({value: csrfValue}));
+router.use(csrf());
 
-app.use(function (req, res, next) {
+router.use(function (req, res, next) {
     var token = req.csrfToken();      // server genearte token and pass the csrftoken to the view 
-//    console.log("token: ", token);
+    console.log("token: ", token);
 //    res.cookie('XSRF-TOKEN', req.session._csrf);  // servre send it to cookie
     res.cookie('XSRF-TOKEN', token);  // servre send it to cookie
     res.locals.csrfToken = token;

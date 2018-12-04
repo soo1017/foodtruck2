@@ -1,3 +1,3 @@
 
 // APP MODULE
-var foodtruckApp = angular.module('foodtruckApp', ['ngRoute', 'ngResource', 'ngFileUpload']);
+var foodtruckApp = angular.module('foodtruckApp', ['ngRoute', 'ngResource', 'ngFileUpload', 'ngCookies']);

@@ -16,10 +16,17 @@ foodtruckApp.directive('signinUser', ['$rootScope', '$http', '$location', 'islog
             scope.signinForm.submitForm = function(item, event) {
                 var data = {
                     email: scope.signinForm.email,
-                    password: scope.signinForm.password,
-                    value: scope.value                      // for csrf
+                    password: scope.signinForm.password
                 };
-                var responsePromise = $http.post("/signin", data);
+                var responsePromise = $http({
+                    url: '/signin', 
+                    method: "POST",
+//                    headers: {
+//                       ' x-xsrf-token': csrf
+//                    },
+                    data: data
+                });
+//                var responsePromise = $http.post("/signin", data);
                 responsePromise.success(function(result1) {
                     if (result1 === 'Ok') {
                         isloginService.setIsLogin(true);
@@ -484,4 +491,24 @@ foodtruckApp.directive('stockDrinkLevel', ['$http', function ($http) {
             drinkarryArray: "="
         }
     }
+}]);
+
+
+foodtruckApp.factory('XSRFInterceptor', ['$cookies', '$log', function ($cookies, $log) {
+
+    var XSRFInterceptor = {
+
+        request: function(config) {
+
+            var token = $cookies.get('XSRF-TOKEN');
+
+            if (token) {
+                config.headers['X-XSRF-TOKEN'] = token;
+//                $log.info("X-XSRF-TOKEN: " + token);
+            }
+
+            return config;
+        }
+    };
+    return XSRFInterceptor;
 }]);
